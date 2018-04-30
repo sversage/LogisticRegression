@@ -50,9 +50,14 @@ class MyLogisticRegression(object):
 
         Z = self.X.dot(self.W) + self.b
         A = self.sigmoid(Z)
-
+        #derivative all in one
         dW = 1/m * self.X.T.dot(A - self.y)
         db = np.mean(A - self.y)
+
+        #Break out by the chain rule
+        # d_sigma = -((self.y/A) - (1-self.y)/(1-A))
+        # dZ = A * (1-A)
+        # dW = 1/m * self.X.T.dot(d_sigma * dZ)
 
         self.W -= self.alpha * dW
         self.b -= self.alpha * db
